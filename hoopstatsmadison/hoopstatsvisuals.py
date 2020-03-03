@@ -52,6 +52,36 @@ class HoopStatsVisuals(HoopStatsDB):
         plt.show()
 
     def shot_chart_dope(self, player, team, home_team, visiting_team, kind='kde'):
-        pass
+        self.team = team
+        self.home_team = home_team
+        self.visiting_team = visiting_team
+        self.player = player
+        dat = self.get_dat()
+        cleaned_dat = self.clean_dat(dat)
+
+        # Creating shot chart
+        # Join Map
+        cmap = plt.cm.viridis
+
+        # n_levels sets the number of contour lines for the main kde plot
+        joint_shot_chart = sns.jointplot(cleaned_dat['LOC_X'], cleaned_dat['LOC_Y'], stat_func=None,
+                                         kind=kind, space=0.01, color=cmap(.1),
+                                         cmap=cmap, n_levels=35)
+
+        joint_shot_chart.fig.set_size_inches(12, 11)
+
+        # A joint plot has 3 Axes, the first one called ax_joint
+        # is the one we want to draw our court onto and adjust some other settings
+        ax = joint_shot_chart.ax_joint
+        draw_court(ax)
+        ax.set_xlim(-250, 250)
+        ax.set_ylim(370, -47.50)
+        ax.tick_params(labelbottom=False, labelleft=False)
+        plt.xlabel('')
+        plt.ylabel('')
+        plt.legend().remove()
+        plt.title('{} {} {} {}'.format(self.player, self.team,
+                                       self.home_team, self.visiting_team), fontsize=30)
+        plt.show()
 
 
