@@ -16,6 +16,8 @@ class HoopStatsVisuals(HoopStatsDB):
             dat = self.team_df(team_name=self.team)
         elif self.home_team != '' or self.visiting_team != '' or self.player != '':
             dat = self.play_by_play(home_team=self.home_team, visiting_team=self.visiting_team, player=self.player)
+        else:
+            raise Exception('Must have at least one argument specified.')
         return dat
 
     def clean_dat(self, data):
@@ -51,7 +53,7 @@ class HoopStatsVisuals(HoopStatsDB):
                                        self.home_team, self.visiting_team), fontsize=30)
         plt.show()
 
-    def shot_chart_dope(self, player, team, home_team, visiting_team, kind='kde'):
+    def shot_chart_dope(self, team='', home_team='', visiting_team='', player='', kind='kde'):
         self.team = team
         self.home_team = home_team
         self.visiting_team = visiting_team
@@ -68,7 +70,7 @@ class HoopStatsVisuals(HoopStatsDB):
                                          kind=kind, space=0.01, color=cmap(.1),
                                          cmap=cmap, n_levels=35)
 
-        joint_shot_chart.fig.set_size_inches(12, 11)
+        #joint_shot_chart.fig.set_size_inches(12, 11)
 
         # A joint plot has 3 Axes, the first one called ax_joint
         # is the one we want to draw our court onto and adjust some other settings

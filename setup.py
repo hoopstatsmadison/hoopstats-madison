@@ -6,7 +6,7 @@ with open("README.md", "r") as readme_file:
 requirements = ["matplotlib>=3.1.2", "scikit-learn>=0.22.1", "pandas>=0.25.3", "seaborn>=0.10.0"]
 setup(
     name="hoopstatsmadison",
-    version="0.0.2",
+    version="0.0.4",
     author="Brandon Jenkins",
     author_email="brandon_jenkins0@icloud.com",
     description="A package for analyzing hoopstats data",
